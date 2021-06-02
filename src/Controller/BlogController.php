@@ -41,7 +41,7 @@ Class BlogController extends AbstractController
         
         */
 
-        return new JsonResponse(
+        return $this->json(
             [
                 "page" => $page,
                 "data" => self::POSTS,
@@ -70,7 +70,7 @@ Class BlogController extends AbstractController
 
         */ 
 
-        return new JsonResponse(
+        return $this->json(
             self::POSTS[array_search($id, array_column(self::POSTS, 'id'))]
         );
     }
