@@ -24,6 +24,7 @@ Class BlogController extends AbstractController
     public function Postlist($page = 1, Request $request)
     {
         $limit = $request->get('limit', 10);
+       
         $repository = $this->getDoctrine()->getRepository(BlogPost::class);
         $items = $repository->findAll();
 
@@ -33,7 +34,7 @@ Class BlogController extends AbstractController
                 "limit" => $limit,
                 "data" => array_map(function(BlogPost $item){
                    // return $item->getSlugname();
-                    return $this->generateUrl('blog_by_slug', ['slug'=> $item->getSlugname()]);
+                    return $this->generateUrl('blog_by_id', ['id'=> $item->getId()]);
                 }, $items)
             ]
             
@@ -52,7 +53,7 @@ Class BlogController extends AbstractController
     public function post(BlogPost $post)
     {
         // it is also same as "$this->getDoctrine()->getRepository(BlogPost::class)->find($id)"
-        return $this->json($post);
+         return $this->json($post);
     }
 
 
